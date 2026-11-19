@@ -1343,9 +1343,9 @@ p {
 
 .calendar-stage {
   position: relative;
-  max-width: 1040px;
+  max-width: 1000px;
   margin-inline: auto;
-  padding-bottom: 130px;
+  padding-bottom: 120px;
 }
 
 .calendar-stage .calendar-panel {
@@ -1361,25 +1361,41 @@ p {
 }
 
 .calendar-deco--snowman {
-  bottom: -6px;
-  left: -4px;
-  width: clamp(120px, 15vw, 186px);
+  bottom: -18px;
+  left: clamp(-160px, -9vw, -18px);
+  width: clamp(110px, 13vw, 190px);
   height: auto;
   transform: rotate(-4deg);
 }
 
 .calendar-deco--tree {
-  right: -6px;
-  bottom: -10px;
-  width: clamp(120px, 15vw, 178px);
+  right: clamp(-160px, -9vw, -18px);
+  bottom: -20px;
+  width: clamp(110px, 13vw, 180px);
   height: auto;
 }
 
 .calendar-deco--garland {
-  bottom: 14px;
-  left: 120px;
-  width: calc(100% - 240px);
+  bottom: 60px;
+  left: 20px;
+  width: calc(100% - 40px);
   height: auto;
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .calendar-deco--snowman {
+    left: -24px;
+    width: 130px;
+  }
+
+  .calendar-deco--tree {
+    right: -24px;
+    width: 125px;
+  }
+
+  .calendar-panel__foot {
+    padding-inline: 110px;
+  }
 }
 
 .calendar-panel {
