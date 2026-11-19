@@ -1181,13 +1181,13 @@ p {
 
 .signup-form__consent {
   margin: 12px 2px 0;
-  color: var(--muted);
+  color: rgba(248, 243, 235, 0.62);
   font-size: 0.62rem;
   line-height: 1.55;
 }
 
 .signup-form__consent a {
-  color: var(--plum);
+  color: rgba(248, 243, 235, 0.86);
   text-underline-offset: 3px;
 }
 
