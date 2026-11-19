@@ -98,17 +98,10 @@
 
 .test-stage {
   position: relative;
-  z-index: 1;
+  display: grid;
   min-height: 560px;
+  place-items: center;
   padding: 30px 10px;
-}
-
-.test-door,
-.test-envelope {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .test-halo {
@@ -123,9 +116,7 @@
 /* --- Türchen (vor dem Öffnen) ------------------------------------------- */
 
 .test-door {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
   width: min(78vw, 270px);
   aspect-ratio: 0.78;
   padding: 0;
@@ -137,17 +128,16 @@
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 22px 50px rgba(46, 29, 43, 0.14);
-  transform: translate(-50%, -50%);
 }
 
 .test-door:hover {
-  transform: translate(-50%, calc(-50% - 4px));
+  transform: translateY(-4px);
 }
 
 .test-door.is-open {
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.92);
+  transform: scale(0.92);
 }
 
 .test-door__pattern {
@@ -295,21 +285,18 @@
 /* --- Lila Umschlag ------------------------------------------------------ */
 
 .test-envelope {
-  position: absolute;
-  top: 62%;
-  left: 50%;
-  z-index: 1;
+  position: relative;
   width: min(92vw, 440px);
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   perspective: 1400px;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.85) translateY(30px);
+  transform: scale(0.85) translateY(30px);
   transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1);
 }
 
 .test-envelope.is-visible {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1) translateY(0);
+  transform: none;
 }
 
 .test-envelope__body {
@@ -318,7 +305,7 @@
   border-radius: 16px;
   background: linear-gradient(160deg, #6b4a61 0%, #4b3145 55%, #3a2533 100%);
   box-shadow: 0 30px 70px rgba(46, 29, 43, 0.28), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-  overflow: visible;
+  overflow: hidden;
 }
 
 .test-envelope__body::before {
@@ -368,14 +355,14 @@
   inset: 8% 7% 6%;
   background: rgba(255, 253, 248, 0.98);
   border-radius: 12px;
-  padding: 10px 14px;
+  padding: 20px 18px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   text-align: center;
   opacity: 0;
   transform: translateY(40%) scale(0.88);
   transition: opacity 0.5s ease 0.25s, transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1) 0.25s;
   z-index: 2;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .test-envelope.is-open .test-envelope__content {
@@ -711,9 +698,13 @@
   .test-controls { justify-content: stretch; max-width: 100%; }
   .test-control { min-width: 100%; }
   .test-halo { width: 300px; height: 300px; }
-  .test-stage { min-height: 480px; }
-  .test-envelope { width: min(94vw, 360px); }
+  .test-stage { min-height: 480px; place-items: start center; padding-top: 20px; }
+  .test-envelope { width: min(94vw, 360px); margin-top: 0; }
   .test-door { width: min(82vw, 240px); }
+  .test-envelope__content { overflow: visible; padding: 12px 14px; }
+  .test-envelope__content h2 { font-size: 1.35rem; margin: 2px 0 6px; }
+  .test-player__btn { width: 36px; height: 36px; }
+  .test-player__btn svg { width: 14px; height: 14px; }
   .test-success { padding: 30px 20px; }
 }
 
