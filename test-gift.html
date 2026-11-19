@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Testmodus – Geschenk-Öffnung | Adventskalender</title>
+  <meta name="theme-color" content="#4B3145">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=1">
+  <link rel="stylesheet" href="test-gift.css?v=1">
+</head>
+<body class="simple-page test-page">
+  <a class="skip-link" href="#main">Direkt zum Inhalt</a>
+
+  <header class="site-header site-header--simple" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Zurück zum Adventskalender">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">
+          <span class="brand__name">Path of Grace</span>
+          <span class="brand__sub">Testmodus · Geschenk-Öffnung</span>
+        </span>
+      </a>
+      <a class="button button--primary nav-cta" href="index.html">
+        <span>Zum Kalender</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main" class="test-main">
+    <div class="test-head">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>Testmodus</p>
+      <h1>Geschenk-<em>öffnung</em></h1>
+      <p class="test-head__text">Simuliere ein Datum und öffne ein Türchen. So sieht der Moment aus, an dem ein Geschenk erscheint und eingelöst wird.</p>
+    </div>
+
+    <div class="test-controls" aria-label="Testeinstellungen">
+      <label class="test-control">
+        <span>Tag</span>
+        <select id="testDay">
+          <option value="1" selected>1. Dezember</option>
+          <option value="2">2. Dezember</option>
+          <option value="3">3. Dezember</option>
+          <option value="4">4. Dezember</option>
+          <option value="5">5. Dezember</option>
+          <option value="6">6. Dezember</option>
+        </select>
+      </label>
+      <label class="test-control">
+        <span>Türchen-Typ</span>
+        <select id="testType">
+          <option value="gift" selected>Geschenk</option>
+          <option value="audio">Audio</option>
+        </select>
+      </label>
+      <button class="button button--light test-reset" id="testReset" type="button">Zurücksetzen</button>
+    </div>
+
+    <div class="test-stage" id="testStage">
+      <div class="test-halo" aria-hidden="true"></div>
+
+      <button class="test-door" id="testDoor" type="button" aria-label="Türchen öffnen">
+        <span class="test-door__flap">
+          <span class="test-door__top">
+            <span class="test-door__num" id="testDoorNum">01</span>
+            <span class="test-door__type" id="testDoorType">Geschenk</span>
+          </span>
+          <span class="test-door__date" id="testDoorDate">Di, 1. Dez.</span>
+          <span class="test-door__knob" aria-hidden="true"></span>
+          <span class="test-door__hint">Klick zum Öffnen <span aria-hidden="true">→</span></span>
+        </span>
+        <span class="test-door__inside" aria-hidden="true">
+          <span class="test-door__glow"></span>
+        </span>
+      </button>
+
+      <div class="test-sparkles" id="testSparkles" aria-hidden="true"></div>
+
+      <section class="test-reveal" id="testReveal" hidden aria-live="polite">
+        <p class="eyebrow" id="testRevealEyebrow">Dein Geschenk</p>
+        <h2 id="testRevealTitle">50 % auf meine 1:1-Begleitung</h2>
+        <p class="test-reveal__draw" id="testRevealDraw">Alle, die angemeldet sind, sind heute automatisch im Lostopf. Ich ziehe heute Abend und melde mich bei der Gewinnerin oder dem Gewinner per Mail.</p>
+        <div class="test-reveal__audio" id="testRevealAudio" hidden>
+          <span class="audio-preview__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5l11 6.5-11 6.5z"></path></svg></span>
+          <div>
+            <p class="audio-preview__title">Audio-Einladung</p>
+            <p class="audio-preview__meta">Hier würde dein MP3 abspielen.</p>
+          </div>
+        </div>
+        <div class="test-reveal__actions">
+          <button class="button button--primary" id="testRedeem" type="button">
+            <span>Jetzt einlösen</span>
+            <svg class="button__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"></path></svg>
+          </button>
+          <button class="button button--gold" id="testAngel" type="button" hidden>
+            <span>Zieh deine Engelskarte</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="test-success" id="testSuccess" hidden aria-live="polite">
+        <span class="test-success__check" aria-hidden="true">
+          <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"></circle><path d="M15 27l8 8 15-17"></path></svg>
+        </span>
+        <p class="eyebrow">Eingelöst</p>
+        <h2>Viel Freude mit deinem Geschenk.</h2>
+        <p class="test-success__text" id="testSuccessText">Dein Geschenk ist für dich reserviert. Die Details findest du in deiner E-Mail.</p>
+        <button class="button button--light" id="testReplay" type="button">Noch einmal ansehen</button>
+      </section>
+
+      <div class="test-confetti" id="testConfetti" aria-hidden="true"></div>
+    </div>
+  </main>
+
+  <script src="doors.js?v=1"></script>
+  <script src="test-gift.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+/* ==========================================================================
+   Testmodus – Geschenk-Öffnung (nur zu Testzwecken, nicht Teil der Live-Seite)
+   ========================================================================== */
+
+.test-page {
+  background: var(--ivory);
+}
+
+.test-main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 120px 20px 90px;
+}
+
+.test-head {
+  text-align: center;
+}
+
+.test-head .eyebrow {
+  justify-content: center;
+}
+
+.test-head h1 {
+  margin: 6px 0 12px;
+  color: var(--plum);
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.test-head h1 em {
+  color: var(--gold-deep);
+  font-style: italic;
+}
+
+.test-head__text {
+  max-width: 46ch;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.test-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: center;
+  gap: 12px;
+  margin: 34px auto 26px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+}
+
+.test-control {
+  display: flex;
+  min-width: 150px;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.test-control span {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.test-control select {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--ivory);
+  color: var(--plum);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+}
+
+.test-reset {
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--plum);
+  font-size: 0.66rem;
+}
+
+.test-stage {
+  position: relative;
+  display: grid;
+  min-height: 520px;
+  place-items: center;
+  padding: 30px 10px;
+}
+
+.test-halo {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 180, 106, 0.2), transparent 65%);
+  pointer-events: none;
+}
+
+/* --- Die Türe ----------------------------------------------------------- */
+
+.test-door {
+  position: relative;
+  width: min(78vw, 270px);
+  aspect-ratio: 0.78;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 1200px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.test-door:hover {
+  transform: translateY(-4px);
+}
+
+.test-door.is-open {
+  pointer-events: none;
+}
+
+.test-door__flap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid rgba(75, 49, 69, 0.12);
+  border-radius: 20px;
+  background: linear-gradient(155deg, #fbf7ef, #f1e7d8);
+  box-shadow: 0 22px 50px rgba(46, 29, 43, 0.12), inset 0 0 0 5px rgba(255, 255, 255, 0.35);
+  color: var(--plum);
+  text-align: left;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 0.95s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease 0.4s;
+  z-index: 2;
+}
+
+.test-door.is-open .test-door__flap {
+  transform: rotateY(-118deg);
+  opacity: 0;
+}
+
+.test-door__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.test-door__num {
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
+.test-door__type {
+  color: var(--gold-deep);
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.test-door__date {
+  color: var(--muted);
+  font-size: 0.64rem;
+}
+
+.test-door__knob {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(214, 180, 106, 0.2);
+  transform: translateY(-50%);
+}
+
+.test-door__hint {
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.test-door__inside {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(214, 180, 106, 0.35);
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 40%, #6b4a61, #3a2533 70%);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.test-door__glow {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236, 215, 167, 0.95), transparent 70%);
+  animation: testPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes testPulse {
+  0%, 100% { transform: scale(0.85); opacity: 0.55; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+
+/* --- Funken ------------------------------------------------------------- */
+
+.test-sparkles,
+.test-confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.test-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 10px 2px rgba(236, 215, 167, 0.7);
+  animation: testSpark 1.1s ease-out forwards;
+}
+
+@keyframes testSpark {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+/* --- Geschenk-Inhalt ----------------------------------------------------- */
+
+.test-reveal,
+.test-success {
+  position: relative;
+  z-index: 5;
+  width: min(100%, 470px);
+  padding: 30px 28px;
+  border: 1px solid rgba(214, 180, 106, 0.35);
+  border-radius: 24px;
+  background: rgba(255, 253, 248, 0.97);
+  box-shadow: 0 30px 70px rgba(46, 29, 43, 0.16);
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9) translateY(24px);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.test-reveal.is-visible,
+.test-success.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.test-reveal .eyebrow,
+.test-success .eyebrow {
+  justify-content: center;
+}
+
+.test-reveal h2,
+.test-success h2 {
+  margin: 4px 0 14px;
+  color: var(--plum);
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.test-reveal__draw {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  background: rgba(214, 180, 106, 0.1);
+  color: var(--plum);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.test-reveal__audio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-align: left;
+}
+
+.test-reveal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.test-reveal__actions .button {
+  min-height: 46px;
+}
+
+/* --- Einlösen-Erfolg ----------------------------------------------------- */
+
+.test-success__check {
+  display: block;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 18px;
+}
+
+.test-success__check svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.test-success__check circle {
+  fill: none;
+  stroke: rgba(184, 191, 174, 0.5);
+  stroke-width: 2;
+  stroke-dasharray: 152;
+  stroke-dashoffset: 152;
+  animation: testDrawCircle 0.7s ease forwards;
+}
+
+.test-success__check path {
+  fill: none;
+  stroke: var(--gold-deep);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+  animation: testDrawCheck 0.5s ease 0.5s forwards;
+}
+
+@keyframes testDrawCircle { to { stroke-dashoffset: 0; } }
+@keyframes testDrawCheck { to { stroke-dashoffset: 0; } }
+
+.test-success__text {
+  margin: 0 auto 22px;
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+/* --- Konfetti ------------------------------------------------------------ */
+
+.test-confetti {
+  z-index: 7;
+}
+
+.test-bit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: testConfetti 1.5s ease-out forwards;
+}
+
+@keyframes testConfetti {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.4); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--cx)), calc(-50% + var(--cy))) rotate(var(--rot)) scale(1); opacity: 0; }
+}
+
+/* --- Engelskarte --------------------------------------------------------- */
+
+.test-angel-card {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--ivory);
+  transform: rotateY(90deg);
+  transform-origin: center;
+  animation: testFlipCard 0.55s ease forwards;
+}
+
+@keyframes testFlipCard {
+  to { transform: rotateY(0); }
+}
+
+.test-angel-card p {
+  margin: 0;
+  color: var(--plum);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .test-main { padding: 104px 14px 70px; }
+  .test-controls { justify-content: stretch; }
+  .test-control { min-width: 100%; }
+  .test-reset { width: 100%; }
+}
