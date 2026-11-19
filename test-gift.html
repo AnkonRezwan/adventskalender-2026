@@ -10,7 +10,7 @@
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?v=1">
-  <link rel="stylesheet" href="test-gift.css?v=4">
+  <link rel="stylesheet" href="test-gift.css?v=6">
 </head>
 <body class="simple-page test-page">
   <a class="skip-link" href="#main">Direkt zum Inhalt</a>
@@ -47,14 +47,6 @@
           <option value="4">4. Dezember</option>
           <option value="5">5. Dezember</option>
           <option value="6">6. Dezember</option>
-        </select>
-      </label>
-      <label class="test-control">
-        <span>Türchen-Typ</span>
-        <select id="testType">
-          <option value="audio" selected>Audio</option>
-          <option value="gift">Geschenk</option>
-          <option value="coupon">Coupon</option>
         </select>
       </label>
     </div>
@@ -110,11 +102,11 @@
       <p class="eyebrow">Eingelöst</p>
       <h2 id="testSuccessTitle">Viel Freude mit deinem Geschenk.</h2>
       <p class="test-success__text" id="testSuccessText">Dein Geschenk ist für dich reserviert. Die Details findest du in deiner E-Mail.</p>
-      <button class="button button--light" id="testReplay" type="button">Noch einmal ansehen</button>
+      <a class="test-replay" id="testReplay" href="#">Noch einmal ansehen</a>
     </section>
   </main>
 
-  <script src="doors.js?v=4"></script>
-  <script src="test-gift.js?v=4"></script>
+  <script src="doors.js?v=6"></script>
+  <script src="test-gift.js?v=6"></script>
 </body>
 </html>

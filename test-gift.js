@@ -14,7 +14,7 @@
   const ENGELSKARTEN = window.ADVENT_ENGELSKARTEN || [];
 
   const daySelect = $("#testDay");
-  const typeSelect = $("#testType");
+
 
   const door = $("#testDoor");
   const doorNum = $("#testDoorNum");
@@ -27,7 +27,6 @@
   const success = $("#testSuccess");
   const successTitle = $("#testSuccessTitle");
   const successText = $("#testSuccessText");
-  const replayBtn = $("#testReplay");
 
   let currentDoor = DOORS[0] || { day: 1, type: "gift", title: "Dein Geschenk" };
   let playerRunning = false;
@@ -36,17 +35,22 @@
     return WEEKDAYS[new Date(Date.UTC(2026, 11, day)).getUTCDay()];
   }
 
+  function isCoupon(title) {
+    return /%|Vergünstigung|Vergünstigung/i.test(title);
+  }
+
   function syncDoor() {
     const day = Number(daySelect.value);
-    const forcedType = typeSelect.value;
     const found = DOORS.find((d) => d.day === day);
+    let type = found ? found.type : "gift";
+    if (type === "gift" && found && isCoupon(found.title)) type = "coupon";
     currentDoor = found
-      ? { ...found, type: forcedType }
-      : { day, type: forcedType, title: "Dein Türchen", button: "Mehr erfahren", link: "#" };
+      ? { ...found, type }
+      : { day, type, title: "Dein Türchen", button: "Mehr erfahren", link: "#" };
 
     doorNum.textContent = pad(day);
     doorType.textContent =
-      forcedType === "gift" ? "Geschenk" : forcedType === "coupon" ? "Coupon" : "Audio";
+      type === "gift" ? "Geschenk" : type === "coupon" ? "Coupon" : "Audio";
     doorDate.textContent = `${weekday(day)}, ${day}. Dez.`;
   }
 
@@ -194,39 +198,24 @@
           <svg class="button__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
         </a>`;
 
-    if (isGift || isCoupon) {
+    if (isGift) {
       html += `
-        <div class="test-reveal__actions">
-          <button class="button button--primary" id="testRedeem" type="button">
-            <span>Jetzt einlösen</span>
-            <svg class="button__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
-          </button>
-          <button class="button button--gold" id="testAngel" type="button">
-            <span>Zieh deine Engelskarte</span>
-          </button>
-        </div>
+        <p class="test-reveal__draw">Alle, die angemeldet sind, sind heute automatisch im Lostopf. Ich ziehe heute Abend und melde mich bei der Gewinnerin oder dem Gewinner per Mail.</p>
+        <div class="test-reveal__link">${poGButton}</div>`;
+    } else if (isCoupon) {
+      html += `
         <div class="test-reveal__link">${poGButton}</div>`;
     } else {
       html += `
-        <div class="test-reveal__actions">
-          <button class="button button--primary" id="testRedeem" type="button">
-            <span>Fertig</span>
-            <svg class="button__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
-          </button>
-          <button class="button button--gold" id="testAngel" type="button">
-            <span>Zieh deine Engelskarte</span>
-          </button>
-        </div>
         <div class="test-reveal__link">${poGButton}</div>`;
     }
 
     content.innerHTML = html;
 
     // Wire up interactions
-    const redeemBtn = $("#testRedeem");
-    const angelBtn = $("#testAngel");
     const playBtn = $("#testPlayBtn");
     const copyBtn = $("#testCopyBtn");
+    const replayLink = $("#testReplay");
 
     wirePlayer();
     if (copyBtn) {
@@ -241,31 +230,11 @@
         });
       });
     }
-    if (redeemBtn) {
-      redeemBtn.addEventListener("click", () => {
-        stopPlayer();
-        hide(envelope);
-        const isGift = currentDoor.type === "gift" || currentDoor.type === "coupon";
-        successTitle.textContent = isGift ? "Viel Freude mit deinem Geschenk." : "Dein Audio ist bereit.";
-        successText.textContent = isGift
-          ? "Dein Geschenk ist für dich reserviert. Die Details findest du in deiner E-Mail."
-          : "Viel Freude beim Hören. Dein Audio bleibt in deinem Postfach verfügbar.";
-        window.setTimeout(() => {
-          show(success);
-          if (isGift) spawnConfetti();
-        }, 420);
-      });
-    }
-    if (angelBtn) {
-      angelBtn.addEventListener("click", () => {
-        if (ENGELSKARTEN.length) {
-          const existing = content.querySelector(".test-angel-card");
-          if (existing) existing.remove();
-          const card = document.createElement("div");
-          card.className = "test-angel-card";
-          card.innerHTML = `<p>${escapeHtml(ENGELSKARTEN[Math.floor(Math.random() * ENGELSKARTEN.length)])}</p>`;
-          content.appendChild(card);
-        }
+    if (replayLink) {
+      replayLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        reset();
+        window.setTimeout(openDoor, 480);
       });
     }
   }
@@ -289,7 +258,10 @@
       envelope.hidden = false;
       window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
         envelope.classList.add("is-visible");
-        window.setTimeout(() => envelope.classList.add("is-open"), 120);
+        window.setTimeout(() => {
+          envelope.classList.add("is-open");
+          spawnConfetti();
+        }, 120);
       }));
       buildContent();
     }, 520);
@@ -307,12 +279,7 @@
   }
 
   door.addEventListener("click", openDoor);
-  replayBtn.addEventListener("click", () => {
-    reset();
-    window.setTimeout(openDoor, 480);
-  });
   daySelect.addEventListener("change", reset);
-  typeSelect.addEventListener("change", reset);
 
   syncDoor();
 })();
