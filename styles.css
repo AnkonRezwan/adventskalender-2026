@@ -3352,11 +3352,12 @@ p {
   }
 }
 
-/* Voller Balken: 100vw enthält die Scrollleiste, damit der Balken auf
-   Windows-Desktops exakt symmetrisch und in voller Breite sitzt. */
+/* Der Header nutzt die sichtbare Viewport-Breite (100 %), damit die
+   Navigation exakt zentriert sitzt und nicht durch die Scrollleiste
+   nach rechts verschoben wird. */
 @media (min-width: 761px) {
   .site-header {
-    width: 100vw;
+    width: 100%;
   }
 }
 
