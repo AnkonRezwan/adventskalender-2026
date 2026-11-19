@@ -49,8 +49,9 @@
   align-items: end;
   justify-content: center;
   gap: 12px;
+  max-width: 260px;
   margin: 34px auto 26px;
-  padding: 16px;
+  padding: 16px 20px;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--white);
