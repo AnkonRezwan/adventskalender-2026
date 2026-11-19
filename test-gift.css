@@ -44,17 +44,20 @@
 }
 
 .test-controls {
+  position: relative;
+  z-index: 20;
   display: flex;
   flex-wrap: wrap;
   align-items: end;
   justify-content: center;
   gap: 12px;
   max-width: 260px;
-  margin: 34px auto 26px;
+  margin: 34px auto 40px;
   padding: 16px 20px;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--white);
+  box-shadow: 0 12px 30px rgba(46, 29, 43, 0.08);
 }
 
 .test-control {
@@ -95,8 +98,9 @@
 
 .test-stage {
   position: relative;
+  z-index: 1;
   min-height: 560px;
-  padding: 30px 10px;
+  padding: 50px 10px 30px;
 }
 
 .test-door,
@@ -294,6 +298,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 1;
   width: min(92vw, 440px);
   aspect-ratio: 4 / 3;
   perspective: 1400px;
@@ -329,7 +334,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 56%;
+  height: 48%;
   background: linear-gradient(160deg, #7a5a71 0%, #5a3d54 100%);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
@@ -340,7 +345,7 @@
 }
 
 .test-envelope.is-open .test-envelope__flap {
-  transform: rotateX(-170deg);
+  transform: rotateX(-125deg);
   z-index: 1;
 }
 
