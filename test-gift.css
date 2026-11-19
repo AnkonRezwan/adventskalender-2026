@@ -524,6 +524,29 @@
   min-height: 44px;
 }
 
+.test-reveal__link {
+  margin-top: 14px;
+}
+
+.test-pog {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--plum);
+  font-size: 0.66rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.test-pog:hover {
+  background: var(--ivory);
+}
+
 /* --- Engelskarte --------------------------------------------------------- */
 
 .test-angel-card {

@@ -15,7 +15,7 @@
 
   const daySelect = $("#testDay");
   const typeSelect = $("#testType");
-  const resetBtn = $("#testReset");
+
   const door = $("#testDoor");
   const doorNum = $("#testDoorNum");
   const doorType = $("#testDoorType");
@@ -30,9 +30,7 @@
   const replayBtn = $("#testReplay");
 
   let currentDoor = DOORS[0] || { day: 1, type: "gift", title: "Dein Geschenk" };
-  let playerTimer = null;
   let playerRunning = false;
-  let playerPos = 0;
 
   function weekday(day) {
     return WEEKDAYS[new Date(Date.UTC(2026, 11, day)).getUTCDay()];
@@ -99,46 +97,61 @@
   }
 
   function stopPlayer() {
-    if (playerTimer) {
-      clearInterval(playerTimer);
-      playerTimer = null;
-    }
-    playerRunning = false;
-  }
-
-  function startPlayer() {
-    if (playerRunning) return;
-    playerRunning = true;
-    const bar = $("#testPlayerBar");
-    const time = $("#testPlayerTime");
-    const btn = $("#testPlayBtn");
-    if (btn) btn.innerHTML = "❚❚";
-    playerTimer = setInterval(() => {
-      playerPos = Math.min(playerPos + 1, 100);
-      if (bar) bar.style.width = `${playerPos}%`;
-      if (time) {
-        const secs = Math.round((playerPos / 100) * 300);
-        const m = Math.floor(secs / 60);
-        const s = secs % 60;
-        time.textContent = `${m}:${String(s).padStart(2, "0")}`;
-      }
-      if (playerPos >= 100) stopPlayer();
-    }, 120);
-  }
-
-  function pausePlayer() {
-    if (playerTimer) {
-      clearInterval(playerTimer);
-      playerTimer = null;
+    const audio = $("#testAudio");
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
     }
     playerRunning = false;
     const btn = $("#testPlayBtn");
     if (btn) btn.innerHTML = "▶";
+    const bar = $("#testPlayerBar");
+    if (bar) bar.style.width = "0%";
+    const time = $("#testPlayerTime");
+    if (time) time.textContent = "0:00";
+  }
+
+  function fmtTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${String(s).padStart(2, "0")}`;
   }
 
   function togglePlayer() {
-    if (playerRunning) pausePlayer();
-    else startPlayer();
+    const audio = $("#testAudio");
+    const btn = $("#testPlayBtn");
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play();
+      playerRunning = true;
+      if (btn) btn.innerHTML = "❚❚";
+    } else {
+      audio.pause();
+      playerRunning = false;
+      if (btn) btn.innerHTML = "▶";
+    }
+  }
+
+  function wirePlayer() {
+    const audio = $("#testAudio");
+    const bar = $("#testPlayerBar");
+    const time = $("#testPlayerTime");
+    const btn = $("#testPlayBtn");
+    if (!audio) return;
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) {
+        if (bar) bar.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+        if (time) time.textContent = fmtTime(audio.currentTime);
+      }
+    });
+    audio.addEventListener("ended", () => {
+      playerRunning = false;
+      if (btn) btn.innerHTML = "▶";
+      if (bar) bar.style.width = "0%";
+      if (time) time.textContent = "0:00";
+      audio.currentTime = 0;
+    });
+    if (btn) btn.addEventListener("click", togglePlayer);
   }
 
   function buildContent() {
@@ -155,6 +168,7 @@
       const audioTitle = currentDoor.title;
       html += `
         <div class="test-player" id="testPlayer">
+          <audio id="testAudio" src="assets/audio/test-melody.wav" preload="auto"></audio>
           <button class="test-player__btn" id="testPlayBtn" type="button" aria-label="Abspielen">▶</button>
           <div class="test-player__info">
             <div class="test-player__bar"><span id="testPlayerBar"></span></div>
@@ -175,6 +189,11 @@
         <p class="test-reveal__draw">Alle, die angemeldet sind, sind heute automatisch im Lostopf. Ich ziehe heute Abend und melde mich bei der Gewinnerin oder dem Gewinner per Mail.</p>`;
     }
 
+    const poGButton = `<a class="button button--light test-pog" href="https://pathofgrace.de/" target="_blank" rel="noopener">
+          <span>Mehr über Path of Grace</span>
+          <svg class="button__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
+        </a>`;
+
     if (isGift || isCoupon) {
       html += `
         <div class="test-reveal__actions">
@@ -185,7 +204,8 @@
           <button class="button button--gold" id="testAngel" type="button">
             <span>Zieh deine Engelskarte</span>
           </button>
-        </div>`;
+        </div>
+        <div class="test-reveal__link">${poGButton}</div>`;
     } else {
       html += `
         <div class="test-reveal__actions">
@@ -196,7 +216,8 @@
           <button class="button button--gold" id="testAngel" type="button">
             <span>Zieh deine Engelskarte</span>
           </button>
-        </div>`;
+        </div>
+        <div class="test-reveal__link">${poGButton}</div>`;
     }
 
     content.innerHTML = html;
@@ -207,9 +228,7 @@
     const playBtn = $("#testPlayBtn");
     const copyBtn = $("#testCopyBtn");
 
-    if (playBtn) {
-      playBtn.addEventListener("click", togglePlayer);
-    }
+    wirePlayer();
     if (copyBtn) {
       copyBtn.addEventListener("click", () => {
         const code = $("#testCouponCode").textContent;
@@ -265,7 +284,6 @@
     door.classList.add("is-open");
     spawnSparkles();
     stopPlayer();
-    playerPos = 0;
 
     window.setTimeout(() => {
       envelope.hidden = false;
@@ -285,12 +303,10 @@
     sparkles.innerHTML = "";
     confetti.innerHTML = "";
     stopPlayer();
-    playerPos = 0;
     syncDoor();
   }
 
   door.addEventListener("click", openDoor);
-  resetBtn.addEventListener("click", reset);
   replayBtn.addEventListener("click", () => {
     reset();
     window.setTimeout(openDoor, 480);
