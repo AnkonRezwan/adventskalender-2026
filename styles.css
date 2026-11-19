@@ -1369,9 +1369,9 @@ p {
 }
 
 .calendar-deco--tree {
-  right: clamp(-160px, -9vw, -18px);
-  bottom: -20px;
-  width: clamp(110px, 13vw, 180px);
+  right: clamp(-145px, -8vw, -18px);
+  bottom: 4px;
+  width: clamp(121px, 14.3vw, 198px);
   height: auto;
 }
 
@@ -1389,8 +1389,8 @@ p {
   }
 
   .calendar-deco--tree {
-    right: -24px;
-    width: 125px;
+    right: -18px;
+    width: 138px;
   }
 
   .calendar-panel__foot {
