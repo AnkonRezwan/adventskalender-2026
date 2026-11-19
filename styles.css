@@ -1361,9 +1361,9 @@ p {
 }
 
 .calendar-deco--snowman {
-  bottom: -18px;
-  left: clamp(-160px, -9vw, -18px);
-  width: clamp(110px, 13vw, 190px);
+  bottom: 30px;
+  left: clamp(-145px, -8vw, -18px);
+  width: clamp(121px, 14.3vw, 198px);
   height: auto;
   transform: rotate(-4deg);
 }
@@ -1384,8 +1384,8 @@ p {
 
 @media (min-width: 761px) and (max-width: 1100px) {
   .calendar-deco--snowman {
-    left: -24px;
-    width: 130px;
+    left: -18px;
+    width: 143px;
   }
 
   .calendar-deco--tree {
