@@ -1377,8 +1377,8 @@ p {
 
 .calendar-deco--garland {
   bottom: 60px;
-  left: 20px;
-  width: calc(100% - 40px);
+  left: -14px;
+  width: calc(100% + 28px);
   height: auto;
 }
 
