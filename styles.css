@@ -4209,7 +4209,11 @@ p {
   }
 
   .calendar-deco--garland {
-    display: none;
+    display: block;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    height: auto;
   }
 }
 

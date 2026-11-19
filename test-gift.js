@@ -261,6 +261,13 @@
         window.setTimeout(() => {
           envelope.classList.add("is-open");
           spawnConfetti();
+          window.setTimeout(() => {
+            const btn = document.querySelector(".test-pog");
+            if (btn) {
+              const rect = btn.getBoundingClientRect();
+              window.scrollBy(0, rect.bottom - window.innerHeight + 40);
+            }
+          }, 400);
         }, 120);
       }));
       buildContent();
