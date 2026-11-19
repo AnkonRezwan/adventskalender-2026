@@ -1366,6 +1366,7 @@ p {
   width: clamp(121px, 14.3vw, 198px);
   height: auto;
   transform: rotate(-4deg);
+  z-index: 4;
 }
 
 .calendar-deco--tree {
@@ -1373,6 +1374,7 @@ p {
   bottom: 30px;
   width: clamp(121px, 14.3vw, 198px);
   height: auto;
+  z-index: 4;
 }
 
 .calendar-deco--garland {
@@ -1380,6 +1382,7 @@ p {
   left: -14px;
   width: calc(100% + 28px);
   height: auto;
+  z-index: 3;
 }
 
 @media (min-width: 761px) and (max-width: 1100px) {
