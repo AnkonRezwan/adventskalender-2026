@@ -23,57 +23,10 @@
   const previewAll = previewParam === PREVIEW_TOKEN || (previewParam === "1" && isLocalPreview);
   const dateOverride = params.get("datum");
 
-  const LINKS = {
-    path: "https://pathofgrace.de/",
-    offer: "https://pathofgrace.de/#angebot",
-    klar: "https://pathofgrace.de/",
-    tief: "https://pathofgrace.de/",
-    retreat: "https://pathofgrace.de/retreat-bad-hindelang-2027/",
-    gong: "https://pathofgrace.de/programm-gong/",
-    osteo: "https://gabriele-storz.de/physiotherapie",
-    yoga: "https://gabriele-storz.de/yoga",
-    soul: "https://gabriele-storz.de/einzelsitzungen",
-    courses: "https://gabriele-storz.de/courses",
-    booking: "https://gabriele-storz.de/booking",
-    intro: "https://calendly.com/gabriele-storz/the-path-of-grace-erstgesprach"
-  };
+  const LINKS = window.ADVENT_LINKS || {};
 
-  /* Door plan — adapted from Adventskalender-2026_31-Tuerchen.xlsx.
-     The copy here is used for the internal preview and the public teaser.
-     The final door pages will get the full content. */
-  const DOORS = [
-    { day: 1, type: "audio", special: true, title: "Alchemie der Liebe", link: LINKS.path, button: "Mehr über Path of Grace" },
-    { day: 2, type: "gift", title: "Osteopathie-Behandlung", link: LINKS.osteo, button: "Meine Osteopathie kennenlernen" },
-    { day: 3, type: "audio", title: "Selbstberührung: Hände aufs Herz – für innere Sicherheit", link: LINKS.path, button: "Mehr über Path of Grace" },
-    { day: 4, type: "gift", title: "Yogastunde", link: LINKS.yoga, button: "Zu meinen Yogastunden" },
-    { day: 5, type: "audio", title: "Nervensystem-Regulation: Summen und lange Ausatmung", link: LINKS.offer, button: "Zu den Online-Räumen" },
-    { day: 6, type: "gift", title: "Nikolaus: Platz bei der MeteoriteGong®-Session", link: LINKS.gong, button: "Zur Gong-Session" },
-    { day: 7, type: "audio", title: "Selbstberührung: Arme und Schultern halten – deine Grenzen spüren", link: LINKS.klar, button: "Zu „Klar sehen“" },
-    { day: 8, type: "gift", title: "Ein Platz im 4-Wochen-Raum „Klar sehen“ im Januar (1 von 3)", link: LINKS.klar, button: "Zu „Klar sehen“" },
-    { day: 9, type: "audio", title: "Selbstberührung: Hände auf den Bauch – deinen Beckenraum wärmen", link: LINKS.path, button: "Mehr über Path of Grace" },
-    { day: 10, type: "gift", title: "Soul Session", link: LINKS.soul, button: "Zur Soul Session" },
-    { day: 11, type: "audio", title: "Nervensystem-Regulation: Kiefer und Schultern loslassen – ein Impuls aus der Osteopathie", link: LINKS.osteo, button: "Meine Osteopathie kennenlernen" },
-    { day: 12, type: "gift", title: "Vergünstigung für Let It Flow (2.–5. Januar)", link: LINKS.courses, button: "Zu Let It Flow" },
-    { day: 13, type: "audio", title: "Nervensystem-Regulation: eine kleine Gong-Klangreise zum Lauschen", link: LINKS.gong, button: "Zur Gong-Session" },
-    { day: 14, type: "gift", title: "Osteopathie-Behandlung", link: LINKS.booking, button: "Termin anfragen" },
-    { day: 15, type: "audio", title: "Dein inneres Feuer – sanfter Atem in die Lebendigkeit", link: LINKS.tief, button: "Zu „Tief spüren“" },
-    { day: 16, type: "gift", title: "Vergünstigung für einen Retreatplatz – Alchemie der Liebe", link: LINKS.retreat, button: "Zum Retreat" },
-    { day: 17, type: "audio", title: "Selbstberührung: Sinnlichkeit im Alltag – Berührung, die nährt", link: LINKS.tief, button: "Zu „Tief spüren“" },
-    { day: 18, type: "gift", title: "Yogastunde", link: LINKS.yoga, button: "Zu meinen Yogastunden" },
-    { day: 19, type: "audio", title: "Was willst du nicht mehr tragen? Ein kleines Loslass-Ritual", link: LINKS.intro, button: "Erstgespräch 1:1 buchen" },
-    { day: 20, type: "gift", title: "Ein Platz im 4-Wochen-Raum „Klar sehen“ im Januar (2 von 3)", link: LINKS.klar, button: "Zu „Klar sehen“" },
-    { day: 21, type: "audio", title: "Wintersonnwende – Licht in der längsten Nacht", link: LINKS.path, button: "Mehr über Path of Grace" },
-    { day: 22, type: "gift", title: "Platz bei der MeteoriteGong®-Session", link: LINKS.gong, button: "Zur Gong-Session" },
-    { day: 23, type: "gift", title: "Vergünstigung für Let It Flow (2.–5. Januar)", link: LINKS.courses, button: "Zu Let It Flow" },
-    { day: 24, type: "gift", title: "Heiligabend: 50 % auf meine 3-monatige Einzelbegleitung", link: LINKS.intro, button: "Erstgespräch 1:1 buchen" },
-    { day: 25, type: "audio", title: "Nervensystem-Regulation: Weihnachten – eine Stille, in der du dich selbst hörst", link: LINKS.path, button: "Mehr über Path of Grace" },
-    { day: 26, type: "gift", title: "Yogastunde im Januar", link: LINKS.yoga, button: "Zu meinen Yogastunden" },
-    { day: 27, type: "audio", title: "Selbstberührung: Hände aufs Herz – Rückschau, was hat dich dieses Jahr getragen?", link: LINKS.path, button: "Mehr über Path of Grace" },
-    { day: 28, type: "gift", title: "Osteopathie-Behandlung", link: LINKS.booking, button: "Termin anfragen" },
-    { day: 29, type: "audio", title: "Wünsche ins Feuer – deine Absicht fürs neue Jahr", link: LINKS.intro, button: "Erstgespräch 1:1 buchen" },
-    { day: 30, type: "gift", title: "Der letzte Platz im 4-Wochen-Raum „Klar sehen“ im Januar (3 von 3)", link: LINKS.klar, button: "Zu „Klar sehen“" },
-    { day: 31, type: "audio", title: "Silvester: mit deiner Magie und Kraft ins neue Jahr", link: LINKS.offer, button: "Zu den Online-Räumen" }
-  ];
+  const DOORS = window.ADVENT_DOORS || [];
+  const ENGELSKARTEN = window.ADVENT_ENGELSKARTEN || [];
 
   const WEEKDAYS = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
   const WEEKDAYS_LONG = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
@@ -106,7 +59,7 @@
   const today = getToday();
   const todayStamp = Date.UTC(today.year, today.month - 1, today.day);
   const eventStartStamp = Date.UTC(EVENT_YEAR, EVENT_MONTH - 1, 1);
-  const eventEndStamp = Date.UTC(EVENT_YEAR, EVENT_MONTH - 1, 31);
+  const eventEndStamp = Date.UTC(EVENT_YEAR, EVENT_MONTH - 1, 24);
 
   function doorState(day) {
     if (previewAll) return "preview";
@@ -136,7 +89,7 @@
   }
 
   function calendarStatusText() {
-    if (previewAll) return "Vorschau: alle 31 Türchen sind geöffnet.";
+    if (previewAll) return "Vorschau: alle 24 Türchen sind geöffnet.";
     if (todayStamp < eventStartStamp) {
       const days = Math.ceil((eventStartStamp - todayStamp) / DAY_MS);
       return days === 1 ? "Morgen öffnet sich Türchen 1." : `Noch ${days} ${pluralDays(days)} bis Türchen 1.`;
@@ -145,7 +98,7 @@
       const day = Math.floor((todayStamp - eventStartStamp) / DAY_MS) + 1;
       return day === 1 ? "Heute öffnet sich Türchen 1." : `Heute: Türchen ${day}.`;
     }
-    return "Alle 31 Türchen sind geöffnet.";
+    return "Alle 24 Türchen sind geöffnet.";
   }
 
   function stateLabel(state, day) {
@@ -225,11 +178,7 @@
           <span>Kostenlos anmelden</span>
           ${arrowIcon()}
         </button>
-        <label class="check">
-          <input type="checkbox" name="consent" required>
-          <span class="check__box" aria-hidden="true"></span>
-          <span>Ich bin mit der Verarbeitung meiner Daten gemäß der <a href="https://gabriele-storz.de/privacy/" target="_blank" rel="noopener">Datenschutzerklärung</a> einverstanden.</span>
-        </label>
+        <p class="signup-form__consent">Mit deiner Anmeldung bekommst du meinen Adventskalender und bist ab sofort in meinem Newsletter. Du kannst dich jederzeit mit einem Klick abmelden. <a href="https://gabriele-storz.de/privacy/" target="_blank" rel="noopener">Datenschutz</a></p>
         <p class="signup-form__status" role="status" aria-live="polite"></p>
       </form>
       <div class="signup-success" hidden tabindex="-1">
@@ -254,7 +203,7 @@
 
   function previewCopy(door) {
     if (door.day === 1) {
-      return "Hinter dem ersten Türchen wartet meine Audio-Reise „Alchemie der Liebe – Eine Reise zurück in deinen Körper und dein inneres Feuer.“";
+      return "Hinter dem ersten Türchen wartet meine Audio-Reise „Willkommen – Hände aufs Herz“ (ca. 5 Min.).";
     }
     if (door.type === "gift") {
       return `Heute öffnet sich ein Geschenk: ${escapeHTML(door.title)}. Antworte auf die Türchen-Mail mit dem Wort FEUER, um mitzumachen. Heute Abend ziehe ich.`;
@@ -271,7 +220,7 @@
         <p>Trag dich ein, dann bekommst du jeden Morgen dein Türchen per E-Mail – kostenlos.</p>
         <div class="dialog-meta">
           <span>${escapeHTML(typeLabel(door))}</span>
-          <span>1.–31. Dezember ${EVENT_YEAR}</span>
+          <span>1.–24. Dezember ${EVENT_YEAR}</span>
         </div>
         <div class="door-dialog__actions">
           <a class="button button--primary" href="#anmeldung" data-dialog-signup>
@@ -361,7 +310,7 @@
     endcard.innerHTML = `
       <div>
         <span class="calendar-endcard__eyebrow">Für dich</span>
-        <p>Alle 31 Türchen sind kostenlos.</p>
+        <p>Alle 24 Türchen sind kostenlos.</p>
       </div>
       <a href="#anmeldung">Jetzt anmelden <span aria-hidden="true">→</span></a>`;
     fragment.appendChild(endcard);

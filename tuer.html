@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Türchen – Mein Adventskalender | Path of Grace</title>
+  <meta name="theme-color" content="#4B3145">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body class="simple-page">
+  <a class="skip-link" href="#main">Direkt zum Inhalt</a>
+
+  <header class="site-header site-header--simple" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Path of Grace – zum Adventskalender">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">
+          <span class="brand__name">Path of Grace</span>
+          <span class="brand__sub">Adventskalender 2026</span>
+        </span>
+      </a>
+      <a class="button button--primary nav-cta" href="index.html#anmeldung">
+        <span>Anmelden</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main" class="simple-hero">
+    <div class="simple-hero__grain" aria-hidden="true"></div>
+    <canvas class="simple-hero__snow" data-snow aria-hidden="true"></canvas>
+
+    <section class="simple-card" aria-labelledby="doorTitle">
+      <span class="simple-card__mark" aria-hidden="true"></span>
+      <p class="eyebrow" id="doorEyebrow"><span class="eyebrow__dot"></span><span id="doorEyebrowText">Türchen</span></p>
+      <h1 id="doorTitle">Dein Türchen</h1>
+      <p class="simple-card__lead" id="doorDate"></p>
+
+      <div class="door-meta" id="doorMeta"></div>
+      <div class="door-content" id="doorContent"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer site-footer--simple">
+    <div class="footer-shell">
+      <div class="footer-bottom">
+        <p>© 2026 Gabriele Storz · <a href="index.html">Zum Adventskalender</a></p>
+        <nav class="footer-legal" aria-label="Rechtliches">
+          <a href="https://gabriele-storz.de/imprint/" target="_blank" rel="noopener">Impressum</a>
+          <a href="https://gabriele-storz.de/privacy/" target="_blank" rel="noopener">Datenschutz</a>
+          <a href="https://gabriele-storz.de/terms/" target="_blank" rel="noopener">Teilnahmebedingungen</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="doors.js?v=2"></script>
+  <script src="script.js?v=2"></script>
+  <script src="tuer.js?v=2"></script>
+</body>
+</html>

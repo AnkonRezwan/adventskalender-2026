@@ -1,7 +1,7 @@
-# Mein Adventskalender – 31 Türchen zurück zu dir
+# Mein Adventskalender – 24 Türchen zurück zu dir
 
 Statische Landingpage für **Path of Grace · Gabriele Storz** zum Adventskalender
-vom **1.–31. Dezember 2026**.
+vom **1.�24. Dezember 2026**.
 
 Die Seite ist ohne Build-Schritt lauffähig: HTML, CSS, JavaScript sowie lokale
 Schriften und Bilder. Es werden keine externen CDNs geladen.
@@ -25,8 +25,8 @@ aber nicht zum Testen von Links und Caching gedacht.
 | URL | Zweck |
 | --- | --- |
 | `/` | Öffentliche Ansicht. Vor dem 1. Dezember sind alle Türchen geschlossen. |
-| `/?datum=2026-12-05` | Simuliert ein Datum (nur für Tests). Türchen 1–4 sind geöffnet, Türchen 5 ist „heute“, Türchen 6–31 geschlossen. |
-| `/?vorschau=1` | Interne Vorschau: alle 31 Türchen zeigen ihren Teaser-Inhalt. Funktioniert **nur auf `localhost`, `127.0.0.1` oder per `file://`**. |
+| `/?datum=2026-12-05` | Simuliert ein Datum (nur für Tests). Türchen 1–4 sind geöffnet, Türchen 5 ist „heute“, T�rchen 6-24 geschlossen. |
+| `/?vorschau=1` | Interne Vorschau: alle 24 Türchen zeigen ihren Teaser-Inhalt. Funktioniert **nur auf `localhost`, `127.0.0.1` oder per `file://`**. |
 | `/?vorschau=grace-advent-2026` | Derselbe Vorschaumodus auf Staging/Produktion. Der Token steht in `script.js` (`PREVIEW_TOKEN`). |
 
 Der Vorschaumodus zeigt nur die Teaser-Texte aus der `DOORS`-Liste, keine
@@ -38,7 +38,7 @@ Quelltext), sondern nur eine Hürde gegen zufälliges Teilen.
 
 - **Hero** mit echter Schnee-Animation (Canvas), Portrait, Anmeldeformular und
   Kennzahlen-Leiste.
-- **Adventskalender** mit 31 Türchen, Datumssteuerung nach `Europe/Berlin`,
+- **Adventskalender** mit 24 Türchen, Datumssteuerung nach `Europe/Berlin`,
   hervorgehobenem 1. Türchen und responsivem Raster (7 / 5 / 4 Spalten).
 - **Türchen-Dialog**: geschlossene Türchen zeigen das Öffnungsdatum,
   geöffnete Türchen den Anmelde-Hinweis und ein Formular. In der Vorschau wird
@@ -143,7 +143,7 @@ Inhalte werden täglich per Brevo-Mail verschickt.
 
 Empfohlenes Modell:
 
-1. 31 nicht erratbare Türchen-Seiten anlegen (z. B. `/tueren/2026/01/`,
+1. 24 nicht erratbare Türchen-Seiten anlegen (z. B. `/tueren/2026/01/`,
    jeweils mit Audio, Text und ggf. Geschenk-Link).
 2. Diese Seiten nicht verlinken und nicht in die Sitemap aufnehmen.
 3. Pro Tag eine Brevo-Automation mit dem jeweiligen Link versenden.
@@ -178,7 +178,7 @@ Double-Opt-in und die Speicherung der Einwilligung abdecken.
 - Vor dem 1. Dezember: alle Türchen geschlossen.
 - Im Dezember: vergangene Tage und der heutige Tag sind geöffnet; zukünftige
   Tage geschlossen.
-- Nach dem 31. Dezember: alle Türchen gelten als geöffnet.
+- Nach dem 24. Dezember: alle Türchen gelten als geöffnet.
 - Öffentlich geöffnete Türchen zeigen immer den Anmelde-Hinweis
   „Melde dich an, um deine Türchen zu bekommen.“ und das Formular.
 - Nur der Vorschaumodus zeigt Teaser-Inhalte.
@@ -204,7 +204,7 @@ gleichzeitig zu sehen. `?datum` verrät keine geschützten Inhalte.
 - Kalender-Raster: 4 Spalten bis 760 px, 5 Spalten von 761–1020 px,
   7 Spalten ab 1021 px
 - Bilder laden, lokale Fonts laden
-- Kalender: 31 Türchen, alle Zustände (geschlossen / heute / geöffnet /
+- Kalender: 24 Türchen, alle Zustände (geschlossen / heute / geöffnet /
   Vorschau) getestet
 - Dialog: Öffnen, Schließen, Tastatur, Anmelde-Gate und Formular-Erfolg
 - Formulare: leere E-Mail, ungültige E-Mail, fehlende Einwilligung, Erfolg
@@ -217,7 +217,7 @@ gleichzeitig zu sehen. `?datum` verrät keine geschützten Inhalte.
 
 - [ ] Brevo-Formulare in allen drei Stellen einsetzen und testen.
 - [ ] Double-Opt-in-Mail, Absender und Redirects in Brevo prüfen.
-- [ ] 31 Türchen-Seiten/Audios erstellen und per Brevo-Automation versenden.
+- [ ] 24 Türchen-Seiten/Audios erstellen und per Brevo-Automation versenden.
 - [ ] Geschenk-Links final prüfen: `LINKS.klar` und `LINKS.tief` zeigen aktuell
       auf die Startseite; für „Klar sehen“/„Tief spüren“ ggf. eigene Seiten
       einsetzen. Bei „Let It Flow“ ist derzeit die Seminarübersicht verlinkt.
@@ -228,7 +228,7 @@ gleichzeitig zu sehen. `?datum` verrät keine geschützten Inhalte.
 - [ ] Impressum-/Datenschutz-Links final gegenprüfen.
 - [ ] Auf dem Zielserver unter `/adventskalender/` deployen und alle Links
       erneut testen.
-- [ ] Datumstest am 1. Dezember und am 31. Dezember durchführen.
+- [ ] Datumstest am 1. Dezember und am 24. Dezember durchführen.
 
 ## Hinweise zu den Bildern
 
