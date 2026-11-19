@@ -1341,6 +1341,47 @@ p {
   }
 }
 
+.calendar-stage {
+  position: relative;
+  max-width: 1040px;
+  margin-inline: auto;
+  padding-bottom: 130px;
+}
+
+.calendar-stage .calendar-panel {
+  position: relative;
+  z-index: 1;
+}
+
+.calendar-deco {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.calendar-deco--snowman {
+  bottom: -6px;
+  left: -4px;
+  width: clamp(120px, 15vw, 186px);
+  height: auto;
+  transform: rotate(-4deg);
+}
+
+.calendar-deco--tree {
+  right: -6px;
+  bottom: -10px;
+  width: clamp(120px, 15vw, 178px);
+  height: auto;
+}
+
+.calendar-deco--garland {
+  bottom: 14px;
+  left: 120px;
+  width: calc(100% - 240px);
+  height: auto;
+}
+
 .calendar-panel {
   padding: clamp(13px, 2vw, 26px);
   border: 1px solid rgba(75, 49, 69, 0.1);
@@ -4130,6 +4171,26 @@ p {
 
   .simple-actions .button {
     width: 100%;
+  }
+
+  .calendar-stage {
+    padding-bottom: 74px;
+  }
+
+  .calendar-deco--snowman {
+    width: 88px;
+    bottom: -2px;
+    left: -8px;
+  }
+
+  .calendar-deco--tree {
+    width: 86px;
+    bottom: -4px;
+    right: -8px;
+  }
+
+  .calendar-deco--garland {
+    display: none;
   }
 }
 
