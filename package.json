@@ -1,0 +1,16 @@
+{
+  "name": "adventskalender-2026",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mein Adventskalender – 24 Türchen zurück zu dir | Path of Grace",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Static site ready')\"",
+    "lint": "node --check server.js && node --check doors.js && node --check script.js && node --check tuer.js && node --check test-gift.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

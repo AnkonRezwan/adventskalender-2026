@@ -169,7 +169,6 @@
     let html = `<p class="eyebrow">${eyebrow}</p><h2>${escapeHtml(title)}</h2>`;
 
     if (isAudio) {
-      const audioTitle = currentDoor.title;
       html += `
         <div class="test-player" id="testPlayer">
           <audio id="testAudio" src="assets/audio/test-melody.wav" preload="auto"></audio>
@@ -178,8 +177,7 @@
             <div class="test-player__bar"><span id="testPlayerBar"></span></div>
             <div class="test-player__meta"><span id="testPlayerTime">0:00</span><span>ca. 5 Min.</span></div>
           </div>
-        </div>
-        <p class="test-reveal__draw" style="display:none"></p>`;
+        </div>`;
     } else if (isCoupon) {
       const code = `GRACE-${String(currentDoor.day).padStart(2, "0")}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
       html += `
@@ -198,22 +196,11 @@
           <svg class="button__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
         </a>`;
 
-    if (isGift) {
-      html += `
-        <p class="test-reveal__draw">Alle, die angemeldet sind, sind heute automatisch im Lostopf. Ich ziehe heute Abend und melde mich bei der Gewinnerin oder dem Gewinner per Mail.</p>
-        <div class="test-reveal__link">${poGButton}</div>`;
-    } else if (isCoupon) {
-      html += `
-        <div class="test-reveal__link">${poGButton}</div>`;
-    } else {
-      html += `
-        <div class="test-reveal__link">${poGButton}</div>`;
-    }
+    html += `<div class="test-reveal__link">${poGButton}</div>`;
 
     content.innerHTML = html;
 
     // Wire up interactions
-    const playBtn = $("#testPlayBtn");
     const copyBtn = $("#testCopyBtn");
     const replayLink = $("#testReplay");
 
@@ -255,6 +242,7 @@
     stopPlayer();
 
     window.setTimeout(() => {
+      door.hidden = true;
       envelope.hidden = false;
       window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
         envelope.classList.add("is-visible");
@@ -262,19 +250,20 @@
           envelope.classList.add("is-open");
           spawnConfetti();
           window.setTimeout(() => {
-            const btn = document.querySelector(".test-pog");
-            if (btn) {
-              const rect = btn.getBoundingClientRect();
-              window.scrollBy(0, rect.bottom - window.innerHeight + 40);
+            const rect = envelope.getBoundingClientRect();
+            const overflow = rect.bottom - window.innerHeight + 24;
+            if (overflow > 0) {
+              window.scrollBy({ top: overflow, behavior: "smooth" });
             }
-          }, 400);
+          }, 420);
         }, 120);
       }));
       buildContent();
-    }, 520);
+    }, 420);
   }
 
   function reset() {
+    door.hidden = false;
     door.classList.remove("is-open");
     envelope.classList.remove("is-visible", "is-open");
     window.setTimeout(() => { envelope.hidden = true; }, 420);
