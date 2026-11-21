@@ -28,18 +28,22 @@ aber nicht zum Testen von Links und Caching gedacht.
 | `/?datum=2026-12-05` | Simuliert ein Datum (nur für Tests). Türchen 1–4 sind geöffnet, Türchen 5 ist „heute“, Türchen 6-24 geschlossen. |
 | `/?vorschau=1` | Interne Vorschau: alle 24 Türchen zeigen ihren Teaser-Inhalt. Funktioniert **nur auf `localhost`, `127.0.0.1` oder per `file://`**. |
 | `/?vorschau=grace-advent-2026` | Derselbe Vorschaumodus auf Staging/Produktion. Der Token steht in `script.js` (`PREVIEW_TOKEN`). |
-| `/tuer.html?nr=5` | Echtes Türchen 5. Der Link wird pro Tag per Brevo verschickt und ist öffentlich nicht verlinkt. |
+| `/tuer.html?token=<slug>` | Echtes Türchen. Der individuelle `<slug>` steht in `doors.js` (`slug` des entsprechenden Türchens). Der Link wird pro Tag per Brevo verschickt und ist öffentlich nicht verlinkt. |
 | `/test-gift.html` | Testseite für alle 24 Türchen: Tag auswählen, Türchen öffnen, Audio/Geschenk/Coupon prüfen. |
 
 Der Vorschaumodus auf der Startseite zeigt nur die Teaser-Texte aus der
 `DOORS`-Liste in `script.js`. Die echten Inhalte liegen auf `tuer.html` und
 werden aus `doors.js` aufgebaut.
 
-Die Türchen-URLs sind bewusst einfach (`?nr=5`) und damit erratbar. Für echten
+Jedes Türchen hat einen eigenen, einzigartigen 32-Zeichen-Token (`slug`) in
+`doors.js`. Der Türchen-Link lautet `tuer.html?token=<slug>`, und `tuer.js`
+öffnet das Türchen nur, wenn der Token exakt zu einem Türchen in `ADVENT_DOORS`
+passt; fehlender oder falscher Token führt zu „Türchen nicht gefunden“. Die
+öffentliche Startseite verlinkt die Türchen-Seiten nicht, so dass die tokens
+nicht über die klassischen Kalender-URLs erraten werden können. Für echten
 Zugriffsschutz müsste der Link z. B. über einen signierten Token oder eine
-serverseitige Prüfung abgesichert werden. Für den aktuellen Ablauf reicht die
-Tatsache, dass die Links nur in den Brevo-Mails stehen und `tuer.html` auf
-`noindex, nofollow` gesetzt ist.
+serverseitige Prüfung abgesichert werden; diese Türchen-Links sind zurzeit
+statisch und nur in den Brevo-Mails untergebracht.
 
 ## Was auf der Seite steckt
 

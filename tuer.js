@@ -1,6 +1,6 @@
 /* ==========================================================================
    Path of Grace · Türchen-Seite
-   Rendert ein einzelnes Türchen aus doors.js (via ?nr=).
+   Rendert ein einzelnes Türchen aus doors.js (via einzigartigem token=<slug>).
    ========================================================================== */
 
 (() => {
@@ -19,8 +19,9 @@
   }
 
   const params = new URLSearchParams(window.location.search);
-  const nr = Number(params.get("nr"));
-  const doorData = DOORS.find((d) => d.day === nr);
+  const token = params.get("token");
+  const doorData = DOORS.find((d) => d.slug === token);
+  const nr = doorData ? doorData.day : NaN;
 
   const eyebrow = $("#doorEyebrowText");
   const heading = $("#doorHeading");
