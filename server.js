@@ -22,6 +22,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get(/^\/[a-z0-9-]+$/i, (req, res) => {
+  res.sendFile(path.join(__dirname, "tuer.html"));
+});
+
 app.listen(PORT, HOST, () => {
   console.log(`Server listening on http://${HOST}:${PORT}`);
 });

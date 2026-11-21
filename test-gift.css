@@ -3,10 +3,15 @@
    ========================================================================== */
 
 .test-page {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
   background: var(--ivory);
 }
 
 .test-main {
+  flex: 1;
+  width: 100%;
   max-width: 780px;
   margin: 0 auto;
   padding: 112px 20px 72px;
@@ -741,6 +746,6 @@
   .test-envelope__seal { top: 78px; }
   .test-envelope__body { padding: 14px 12px; }
   .test-envelope__content { padding: 14px 12px; }
-  .test-page .brand__sub { display: none; }
+  .test-page .site-header .brand__sub { display: none; }
   .test-page .nav-cta { padding: 0 12px; font-size: 0.58rem; }
 }

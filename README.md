@@ -199,7 +199,7 @@ stammt von `gabriele-storz.de` und sollte vor dem Launch noch einmal bestätigt
 werden.
 
 **Coupon:** Nur Tag 2 ist ein Coupon. Der Code steht in `doors.js` als
-`couponCode: "GRACE-1ZU1-50"`. Die Tage 12 und 16 heißen zwar „Vergünstigung“,
+`couponCode: "WZA3N268"`. Die Tage 12 und 16 heißen zwar „Vergünstigung“,
 werden aber bewusst **nicht** als Coupon dargestellt, sondern wie die übrigen
 Geschenke über die Lostopf-/Kontaktlogik eingelöst. Der Code und die
 Gültigkeitsdauer müssen noch von Gabriele bestätigt werden.

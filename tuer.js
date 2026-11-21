@@ -19,7 +19,8 @@
   }
 
   const params = new URLSearchParams(window.location.search);
-  const token = params.get("token");
+  const pathSegment = window.location.pathname.replace(/\/+$/, "").split("/").pop();
+  const token = (params.get("token") || params.get("slug") || (pathSegment && pathSegment !== "tuer.html" && pathSegment !== "tuer" ? pathSegment : "")).trim().toLowerCase();
   const doorData = DOORS.find((d) => d.slug === token);
   const nr = doorData ? doorData.day : NaN;
 

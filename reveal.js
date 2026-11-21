@@ -281,7 +281,6 @@
       } else {
         const links = contactLinks(door);
         html += `
-          <p class="test-reveal__draw">Alle, die angemeldet sind, sind heute automatisch im Lostopf. Ich ziehe heute Abend und melde mich bei der Gewinnerin oder dem Gewinner per Mail.</p>
           <p class="test-contact">So löst du deinen Gewinn ein: Schreib mir auf <a href="${escapeHtml(links.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a> oder per <a href="${escapeHtml(links.email)}">E-Mail</a> – wir finden gemeinsam einen Termin.</p>
           ${planLink(door)}`;
       }

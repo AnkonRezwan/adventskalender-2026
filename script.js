@@ -158,33 +158,65 @@
     return `Türchen ${door.day}, ${fullDate(door.day)}, ${typeLabel(door)}. Öffnet sich am ${door.day}. Dezember.`;
   }
 
-  function signupFormMarkup(prefix) {
-    const emailId = `${prefix}-email`;
-    const emailErrorId = `${prefix}-email-error`;
+  const BREVO_ACTION = "https://dbc2f124.sibforms.com/serve/MUIFAEGaooPHJv6Dvy8S5qlE6VDnQhOZqnqrGLSIyqus3w5L7lLAJ7nEqEbhYZu5WH4Hp0YueNW0wi0tQhUwJerLfcLFw6s9nFgdird03c8yCCgYvSrpef7bo1Co6FfWQEqjRmtU9Q-SHDX_zN9YIbKRr_Dt9nUwPimhZcQatDNaxejFb8rShewl24kZ6ytRnPNtxidT-Cry3--Qsw==";
+
+  function signupFormMarkup(prefix = "dialog") {
+    const emailId = `EMAIL-${prefix}`;
+    const formId = `sib-form-${prefix}`;
     return `
-      <form class="signup-form signup-form--light" data-signup-form novalidate>
-        <div class="signup-form__fields">
-          <label class="field">
-            <span class="field__label">Dein Vorname</span>
-            <input class="field__input" type="text" name="firstname" autocomplete="given-name" placeholder="Wie darf ich dich nennen?">
-          </label>
-          <label class="field">
-            <span class="field__label">Deine E-Mail-Adresse</span>
-            <input class="field__input" id="${emailId}" type="email" name="email" autocomplete="email" inputmode="email" placeholder="du@beispiel.de" required aria-describedby="${emailErrorId}">
-            <span class="field__error" id="${emailErrorId}" role="alert"></span>
-          </label>
+      <div class="sib-form">
+        <div class="sib-form-container">
+          <div class="sib-form-message-panel sib-form-message-panel--error" data-brevo-error>
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon" aria-hidden="true">
+                <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
+              </svg>
+              <span class="sib-form-message-panel__inner-text">Deine Anmeldung konnte nicht gespeichert werden. Bitte versuche es erneut.</span>
+            </div>
+          </div>
+          <div class="sib-form-message-panel sib-form-message-panel--success" data-brevo-success>
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon" aria-hidden="true">
+                <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
+              </svg>
+              <span class="sib-form-message-panel__inner-text">Deine Anmeldung war erfolgreich. Bitte bestätige noch die E-Mail in deinem Postfach.</span>
+            </div>
+          </div>
+          <div class="sib-container--large sib-container--vertical">
+            <form id="${formId}" method="POST" action="${BREVO_ACTION}" data-type="subscription" data-brevo-extra-form novalidate>
+              <div class="sib-input sib-form-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row">
+                    <label class="entry__label" for="${emailId}" data-required="*">Gib deine E-Mail-Adresse ein, um dich anzumelden</label>
+                    <div class="entry__field">
+                      <input class="input" type="email" id="${emailId}" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="du@beispiel.de" data-required="true" required>
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary"></label>
+                  <label class="entry__specification">Gib bitte deine E-Mail-Adresse für die Anmeldung an, z. B. name@beispiel.de.</label>
+                </div>
+              </div>
+              <div class="sib-form__declaration" style="direction:ltr">
+                <div class="declaration-block-icon">
+                  <svg class="svgIcon-sphere" viewBox="0 0 63 63" width="38" height="38" aria-hidden="true">
+                    <path d="M31.54 0l1.05 3.06 3.385-.01-2.735 1.897 1.05 3.042-2.748-1.886-2.738 1.886 1.044-3.05-2.745-1.897h3.393zm13.97 3.019L46.555 6.4l3.384.01-2.743 2.101 1.048 3.387-2.752-2.1-2.752 2.1 1.054-3.382-2.745-2.105h3.385zm9.998 10.056l1.039 3.382h3.38l-2.751 2.1 1.05 3.382-2.744-2.091-2.743 2.091 1.054-3.381-2.754-2.1h3.385zM58.58 27.1l1.04 3.372h3.379l-2.752 2.096 1.05 3.387-2.744-2.091-2.75 2.092 1.054-3.387-2.747-2.097h3.376zm-3.076 14.02l1.044 3.364h3.385l-2.743 2.09 1.05 3.392-2.744-2.097-2.743 2.097 1.052-3.377-2.752-2.117 3.385-.01zm-9.985 9.91l1.045 3.364h3.393l-2.752 2.09 1.05 3.393-2.745-2.097-2.743 2.097 1.05-3.383-2.751-2.1 3.384-.01zM31.45 55.01l1.044 3.043 3.393-.008-2.752 1.9L34.19 63l-2.744-1.895-2.748 1.891 1.054-3.05-2.743-1.9h3.384zm-13.934-3.98l1.036 3.364h3.402l-2.752 2.09 1.053 3.393-2.747-2.097-2.752 2.097 1.053-3.382-2.743-2.1 3.384-.01zm-9.981-9.91l1.045 3.364h3.398l-2.748 2.09 1.05 3.392-2.753-2.1-2.752 2.096 1.053-3.382-2.743-2.102 3.384-.009zM4.466 27.1l1.038 3.372H8.88l-2.752 2.097 1.053 3.387-2.743-2.09-2.748 2.09 1.053-3.387L0 30.472h3.385zm3.069-14.025l1.045 3.382h3.395L9.23 18.56l1.05 3.381-2.752-2.09-2.752 2.09 1.053-3.381-2.744-2.1h3.384zm9.99-10.056L18.57 6.4l3.393.01-2.743 2.1 1.05 3.373-2.754-2.092-2.751 2.092 1.053-3.382-2.744-2.1h3.384zm24.938 19.394l-10-4.22a2.48 2.48 0 00-1.921 0l-10 4.22A2.529 2.529 0 0019 24.75c0 10.47 5.964 17.705 11.537 20.057a2.48 2.48 0 001.921 0C36.921 42.924 44 36.421 44 24.75a2.532 2.532 0 00-1.537-2.336zm-2.46 6.023l-9.583 9.705a.83.83 0 01-1.177 0l-5.416-5.485a.855.855 0 010-1.192l1.177-1.192a.83.83 0 011.177 0l3.65 3.697 7.819-7.916a.83.83 0 011.177 0l1.177 1.191a.843.843 0 010 1.192z" fill="#0092FF"/>
+                  </svg>
+                </div>
+                <div>
+                  <p>Wir arbeiten mit Brevo zusammen, um deine Daten zu erfassen und dir unsere Mitteilungen zu senden. <a href="https://www.brevo.com/de/legal/privacypolicy/" target="_blank" rel="nofollow noopener">Datenschutzerklärung von Brevo</a>.</p>
+                </div>
+              </div>
+              <div class="sib-form-block">
+                <button class="button button--primary sib-form-block__button sib-form-block__button-with-loader" form="${formId}" type="submit">
+                  <span>Jetzt kostenlos anmelden</span>
+                  ${arrowIcon()}
+                </button>
+              </div>
+              <input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <input type="hidden" name="locale" value="de">
+            </form>
+          </div>
         </div>
-        <button class="button button--primary signup-form__button" type="submit">
-          <span>Kostenlos anmelden</span>
-          ${arrowIcon()}
-        </button>
-        <p class="signup-form__consent">Mit deiner Anmeldung bekommst du meinen Adventskalender und bist ab sofort in meinem Newsletter. Du kannst dich jederzeit mit einem Klick abmelden. <a href="https://gabriele-storz.de/privacy/" target="_blank" rel="noopener">Datenschutz</a></p>
-        <p class="signup-form__status" role="status" aria-live="polite"></p>
-      </form>
-      <div class="signup-success" hidden tabindex="-1">
-        <span class="signup-success__icon" aria-hidden="true">${checkIcon}</span>
-        <p class="signup-success__title">Schau in dein Postfach – auch im Spam-Ordner – und bestätige deine Anmeldung.</p>
-        <p class="signup-success__text">Danach bist du dabei. Dein erstes Türchen öffnet sich am 1. Dezember.</p>
       </div>`;
   }
 
@@ -388,101 +420,103 @@
   }
 
   /* ------------------------------------------------------------------------
-     Sign-up handling
-     The fallback forms validate and show the confirmation state. Replace with
-     the real Brevo embed in production (see README.md).
+     Secondary Brevo HTML embeds (Hero & Door Dialog)
      ------------------------------------------------------------------------ */
 
-  function setFieldError(field, message) {
-    if (!field) return;
-    const error = field.querySelector(".field__error");
-    const input = field.querySelector(".field__input");
-    field.classList.toggle("has-error", Boolean(message));
-    if (error) error.textContent = message || "";
-    if (input) input.setAttribute("aria-invalid", message ? "true" : "false");
-  }
+  function initBrevoEmbedForms() {
+    const setEntryError = (entry, message) => {
+      if (!entry) return;
+      const errorLabel = entry.querySelector(".entry__error");
+      entry.classList.toggle("entry_errored", Boolean(message));
+      if (errorLabel) {
+        errorLabel.textContent = message || "";
+        errorLabel.style.display = message ? "block" : "none";
+      }
+    };
 
-  function clearFormState(form) {
-    $$(".field", form).forEach((field) => setFieldError(field, ""));
-    $$(".check", form).forEach((check) => check.classList.remove("has-error"));
-    const status = form.querySelector(".signup-form__status");
-    if (status) {
-      status.textContent = "";
-      status.classList.remove("is-error", "is-info");
-    }
-  }
-
-  function initForms() {
     document.addEventListener("input", (event) => {
-      const form = event.target.closest("[data-signup-form]");
+      const form = event.target.closest("[data-brevo-extra-form]");
       if (!form) return;
-      const field = event.target.closest(".field");
-      if (field) setFieldError(field, "");
-      if (event.target.matches('input[name="consent"]')) {
-        event.target.closest(".check")?.classList.remove("has-error");
-      }
-      const status = form.querySelector(".signup-form__status");
-      if (status && status.classList.contains("is-error")) {
-        status.textContent = "";
-        status.classList.remove("is-error");
-      }
+      setEntryError(event.target.closest(".form__entry"), "");
     });
 
-    document.addEventListener("submit", (event) => {
-      const form = event.target.closest("[data-signup-form]");
+    document.addEventListener("submit", async (event) => {
+      const form = event.target.closest("[data-brevo-extra-form]");
       if (!form) return;
 
       event.preventDefault();
-      clearFormState(form);
 
-      const emailField = form.querySelector('input[type="email"]')?.closest(".field");
-      const emailInput = form.querySelector('input[type="email"]');
-      const consent = form.querySelector('input[name="consent"]');
-      const status = form.querySelector(".signup-form__status");
-      const success = form.nextElementSibling?.classList.contains("signup-success")
-        ? form.nextElementSibling
-        : form.parentElement?.querySelector(".signup-success");
+      const container = form.closest(".sib-form-container");
+      const errorPanel = container?.querySelector("[data-brevo-error]");
+      const successPanel = container?.querySelector("[data-brevo-success]");
+      const emailInput = form.querySelector('input[name="EMAIL"]');
+      const emailEntry = emailInput?.closest(".form__entry");
       const submit = form.querySelector('button[type="submit"]');
-      const email = emailInput?.value.trim() || "";
+      const submitLabel = submit?.querySelector("span");
+      const originalLabel = submitLabel?.textContent || "Jetzt kostenlos anmelden";
 
+      errorPanel?.classList.remove("sib-form-message-panel--active");
+      successPanel?.classList.remove("sib-form-message-panel--active");
+      setEntryError(emailEntry, "");
+
+      const email = emailInput?.value.trim() || "";
       if (!email) {
-        setFieldError(emailField, "Bitte gib deine E-Mail-Adresse ein.");
+        setEntryError(emailEntry, "Dieses Feld darf nicht leer sein.");
         emailInput?.focus();
         return;
       }
 
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        setFieldError(emailField, "Bitte prüfe deine E-Mail-Adresse.");
+        setEntryError(emailEntry, "Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.");
         emailInput?.focus();
-        return;
-      }
-
-      if (consent && !consent.checked) {
-        consent.closest(".check")?.classList.add("has-error");
-        if (status) {
-          status.textContent = "Bitte stimme der Datenschutzerklärung zu.";
-          status.classList.add("is-error");
-        }
-        consent.focus();
         return;
       }
 
       if (submit) {
         submit.disabled = true;
-        const label = submit.querySelector("span");
-        if (label) label.textContent = "Einen Moment …";
+        if (submitLabel) submitLabel.textContent = "Einen Moment …";
       }
 
-      /* Demo submission: shows the Brevo-style confirmation state.
-         The real form is handled by the Brevo embed. */
-      window.setTimeout(() => {
-        form.hidden = true;
-        if (success) {
-          success.hidden = false;
-          success.focus({ preventScroll: true });
-          success.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "nearest" });
+      const resetSubmit = () => {
+        if (submit) submit.disabled = false;
+        if (submitLabel) submitLabel.textContent = originalLabel;
+      };
+
+      const actionUrl = form.getAttribute("action") || BREVO_ACTION;
+      const submitUrl = actionUrl.includes("?") ? `${actionUrl}&isAjax=1` : `${actionUrl}?isAjax=1`;
+
+      try {
+        const response = await fetch(submitUrl, {
+          method: "POST",
+          body: new FormData(form)
+        });
+        let data = null;
+        try {
+          data = await response.json();
+        } catch {
+          data = null;
         }
-      }, 320);
+
+        const hasErrors = !response.ok || data?.success === false || (data?.errors && Object.keys(data.errors).length > 0);
+        if (hasErrors) {
+          if (data?.errors?.EMAIL) {
+            setEntryError(emailEntry, data.errors.EMAIL);
+          } else if (errorPanel) {
+            const textEl = errorPanel.querySelector(".sib-form-message-panel__inner-text");
+            if (textEl && data?.message) textEl.textContent = data.message;
+            errorPanel.classList.add("sib-form-message-panel--active");
+          }
+          resetSubmit();
+          return;
+        }
+
+        form.reset();
+        successPanel?.classList.add("sib-form-message-panel--active");
+        resetSubmit();
+      } catch {
+        errorPanel?.classList.add("sib-form-message-panel--active");
+        resetSubmit();
+      }
     });
   }
 
@@ -821,7 +855,7 @@
   function init() {
     renderCalendar();
     initDoorDialog();
-    initForms();
+    initBrevoEmbedForms();
     initFaq();
     initNavigation();
     initReveals();
