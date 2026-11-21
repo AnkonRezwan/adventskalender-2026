@@ -88,16 +88,6 @@
   font-size: 0.82rem;
 }
 
-.test-reset {
-  height: 42px;
-  padding: 0 18px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: transparent;
-  color: var(--plum);
-  font-size: 0.66rem;
-}
-
 .test-stage {
   position: relative;
   display: grid;
@@ -546,6 +536,46 @@
   min-height: 44px;
 }
 
+.test-contact {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  background: rgba(214, 180, 106, 0.1);
+  color: var(--plum);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.test-contact a {
+  color: var(--plum);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px;
+}
+
+.test-contact a:hover {
+  color: var(--gold-deep);
+}
+
+.test-reveal__more {
+  margin: 0 0 14px;
+}
+
+.test-reveal__more .text-link {
+  font-size: 0.7rem;
+}
+
+.test-coupon__booking {
+  margin: 0 0 12px;
+}
+
+.test-coupon__booking .text-link {
+  font-size: 0.72rem;
+}
+
 .test-reveal__link {
   margin-top: 14px;
 }
@@ -575,6 +605,31 @@
 
 /* --- Engelskarte --------------------------------------------------------- */
 
+.test-reveal__angel {
+  margin: 0 0 2px;
+}
+
+.test-angel-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold-deep);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.test-angel-toggle:hover {
+  color: var(--plum);
+}
+
 .test-angel-card {
   margin-top: 16px;
   padding: 16px;
@@ -599,93 +654,23 @@
   line-height: 1.4;
 }
 
-/* --- Erfolg ------------------------------------------------------------- */
+/* --- Fehlendes Türchen --------------------------------------------------- */
 
-.test-success {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 40px 30px;
-  border: 1px solid rgba(214, 180, 106, 0.35);
-  border-radius: 24px;
-  background: rgba(255, 253, 248, 0.97);
-  box-shadow: 0 30px 70px rgba(46, 29, 43, 0.16);
+.door-error {
+  max-width: 440px;
+  margin: 8px auto 0;
+  padding: 24px 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
   text-align: center;
-  opacity: 0;
-  transform: scale(0.9) translateY(24px);
-  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1);
 }
 
-.test-success.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-.test-success .eyebrow {
-  justify-content: center;
-}
-
-.test-success h2 {
-  margin: 4px 0 14px;
-  color: var(--plum);
-  font-family: var(--font-display);
-  font-size: clamp(1.7rem, 4vw, 2.3rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.test-success__check {
-  display: block;
-  width: 78px;
-  height: 78px;
-  margin: 0 auto 18px;
-}
-
-.test-success__check svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.test-success__check circle {
-  fill: none;
-  stroke: rgba(184, 191, 174, 0.5);
-  stroke-width: 2;
-  stroke-dasharray: 152;
-  stroke-dashoffset: 152;
-  animation: testDrawCircle 0.7s ease forwards;
-}
-
-.test-success__check path {
-  fill: none;
-  stroke: var(--gold-deep);
-  stroke-width: 3.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 44;
-  stroke-dashoffset: 44;
-  animation: testDrawCheck 0.5s ease 0.5s forwards;
-}
-
-@keyframes testDrawCircle { to { stroke-dashoffset: 0; } }
-@keyframes testDrawCheck { to { stroke-dashoffset: 0; } }
-
-.test-success__text {
-  margin: 0 auto 22px;
-  max-width: 34ch;
+.door-error p {
+  margin: 0 0 12px;
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   line-height: 1.6;
-}
-
-.test-replay {
-  display: inline-block;
-  margin-top: 14px;
-  color: var(--plum);
-  font-size: 0.66rem;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
 }
 
 /* --- Konfetti ------------------------------------------------------------ */
@@ -729,6 +714,7 @@
   .test-main { padding: 86px 16px 56px; }
   .test-controls { max-width: 100%; margin: 20px auto 12px; padding: 12px 14px; }
   .test-control { min-width: 0; }
+  .test-control select { min-height: 40px; }
   .test-halo { width: min(85vw, 280px); height: min(85vw, 280px); }
   .test-stage { min-height: 320px; padding: 10px 0 24px; }
   .test-door { width: min(100%, 240px); }
@@ -742,7 +728,6 @@
   .test-player__btn { width: 38px; height: 38px; }
   .test-player__btn svg { width: 14px; height: 14px; }
   .test-pog { min-height: 40px; padding: 8px 14px; font-size: 0.68rem; }
-  .test-success { padding: 28px 18px; }
 }
 
 @media (max-width: 390px) {

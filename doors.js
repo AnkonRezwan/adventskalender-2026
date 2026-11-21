@@ -20,9 +20,14 @@ window.ADVENT_LINKS = {
   courses: "https://gabriele-storz.de/courses"
 };
 
+window.ADVENT_CONTACT = {
+  whatsapp: "https://api.whatsapp.com/send?phone=4917653620975",
+  email: "info@gabriele-storz.de"
+};
+
 window.ADVENT_DOORS = [
   { day: 1, type: "audio", special: true, title: "Willkommen – Hände aufs Herz (ca. 5 Min.)", button: "Mehr über Path of Grace", link: "https://pathofgrace.de/" },
-  { day: 2, type: "gift", title: "50 % auf meine 1:1-Begleitung", button: "Orientierungsgespräch buchen", link: "https://calendly.com/gabriele-storz/the-path-of-grace-erstgesprach" },
+  { day: 2, type: "gift", coupon: true, couponCode: "GRACE-1ZU1-50", title: "50 % auf meine 1:1-Begleitung", button: "Orientierungsgespräch buchen", link: "https://calendly.com/gabriele-storz/the-path-of-grace-erstgesprach" },
   { day: 3, type: "audio", title: "Summen und lange Ausatmung", button: "Zu den Online-Räumen", link: "https://pathofgrace.de/#angebot" },
   { day: 4, type: "gift", title: "Yogastunde", button: "Zu meinen Yogastunden", link: "https://gabriele-storz.de/yoga" },
   { day: 5, type: "audio", title: "Arme und Schultern halten – Grenzen spüren", button: "Zu „Klar sehen“", link: "https://pathofgrace.de/" },

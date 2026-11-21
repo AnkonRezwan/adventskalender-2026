@@ -3220,9 +3220,13 @@ p {
 }
 
 .footer-legal a {
-  color: var(--plum);
+  color: rgba(248, 243, 235, 0.62);
   font-size: 0.62rem;
   text-underline-offset: 3px;
+}
+
+.footer-legal a:hover {
+  color: var(--ivory);
 }
 
 .site-footer--simple .footer-bottom {

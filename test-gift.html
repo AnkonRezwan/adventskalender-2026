@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Testmodus – Geschenk-Öffnung | Adventskalender</title>
+  <title>Testmodus – alle Türchen | Adventskalender</title>
   <meta name="theme-color" content="#4B3145">
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=1">
-  <link rel="stylesheet" href="test-gift.css?v=21">
+  <link rel="stylesheet" href="styles.css?v=19">
+  <link rel="stylesheet" href="test-gift.css?v=24">
 </head>
 <body class="simple-page test-page">
   <a class="skip-link" href="#main">Direkt zum Inhalt</a>
@@ -21,7 +21,7 @@
         <span class="brand__mark" aria-hidden="true"></span>
         <span class="brand__text">
           <span class="brand__name">Path of Grace</span>
-          <span class="brand__sub">Testmodus · Geschenk-Öffnung</span>
+          <span class="brand__sub">Testmodus · alle Türchen</span>
         </span>
       </a>
       <a class="button button--primary nav-cta" href="index.html">
@@ -33,21 +33,14 @@
   <main id="main" class="test-main">
     <div class="test-head">
       <p class="eyebrow"><span class="eyebrow__dot"></span>Testmodus</p>
-      <h1>Geschenk-<em>öffnung</em></h1>
-      <p class="test-head__text">Simuliere ein Datum und öffne ein Türchen. So sieht der Moment aus, an dem ein Geschenk erscheint und eingelöst wird.</p>
+      <h1>Türchen-<em>vorschau</em></h1>
+      <p class="test-head__text">Wähle ein Türchen und öffne es. So sieht der Moment aus, in dem dein Audio oder Geschenk erscheint.</p>
     </div>
 
     <div class="test-controls" aria-label="Testeinstellungen">
       <label class="test-control">
         <span>Tag</span>
-        <select id="testDay">
-          <option value="1" selected>1. Dezember</option>
-          <option value="2">2. Dezember</option>
-          <option value="3">3. Dezember</option>
-          <option value="4">4. Dezember</option>
-          <option value="5">5. Dezember</option>
-          <option value="6">6. Dezember</option>
-        </select>
+        <select id="testDay"></select>
       </label>
     </div>
 
@@ -95,18 +88,10 @@
       <div class="test-confetti" id="testConfetti" aria-hidden="true"></div>
     </div>
 
-    <section class="test-success" id="testSuccess" hidden aria-live="polite">
-      <span class="test-success__check" aria-hidden="true">
-        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"></circle><path d="M15 27l8 8 15-17"></path></svg>
-      </span>
-      <p class="eyebrow">Eingelöst</p>
-      <h2 id="testSuccessTitle">Viel Freude mit deinem Geschenk.</h2>
-      <p class="test-success__text" id="testSuccessText">Dein Geschenk ist für dich reserviert. Die Details findest du in deiner E-Mail.</p>
-      <a class="test-replay" id="testReplay" href="#">Noch einmal ansehen</a>
-    </section>
   </main>
 
-  <script src="doors.js?v=20"></script>
-  <script src="test-gift.js?v=21"></script>
+  <script src="doors.js?v=23"></script>
+  <script src="reveal.js?v=23"></script>
+  <script src="test-gift.js?v=23"></script>
 </body>
 </html>
