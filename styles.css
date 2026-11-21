@@ -1546,49 +1546,7 @@ p {
   z-index: 1;
 }
 
-.calendar-deco {
-  position: absolute;
-  z-index: 2;
-  pointer-events: none;
-  user-select: none;
-}
-
-.calendar-deco--snowman {
-  bottom: 30px;
-  left: clamp(-145px, -8vw, -18px);
-  width: clamp(121px, 14.3vw, 198px);
-  height: auto;
-  transform: rotate(-4deg);
-  z-index: 4;
-}
-
-.calendar-deco--tree {
-  right: clamp(-145px, -8vw, -18px);
-  bottom: 30px;
-  width: clamp(121px, 14.3vw, 198px);
-  height: auto;
-  z-index: 4;
-}
-
-.calendar-deco--garland {
-  bottom: 60px;
-  left: -14px;
-  width: calc(100% + 28px);
-  height: auto;
-  z-index: 3;
-}
-
 @media (min-width: 761px) and (max-width: 1100px) {
-  .calendar-deco--snowman {
-    left: -18px;
-    width: 143px;
-  }
-
-  .calendar-deco--tree {
-    right: -18px;
-    width: 138px;
-  }
-
   .calendar-panel__foot {
     padding-inline: 110px;
   }
@@ -4397,26 +4355,7 @@ p {
     padding-bottom: 74px;
   }
 
-  .calendar-deco--snowman {
-    width: 88px;
-    bottom: -2px;
-    left: -8px;
   }
-
-  .calendar-deco--tree {
-    width: 86px;
-    bottom: -4px;
-    right: -8px;
-  }
-
-  .calendar-deco--garland {
-    display: block;
-    bottom: 30px;
-    left: 0;
-    width: 100%;
-    height: auto;
-  }
-}
 
 @media (max-width: 410px) {
   .hero__title-line {
