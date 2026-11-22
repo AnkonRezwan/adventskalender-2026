@@ -196,6 +196,14 @@
                   <label class="entry__specification">Gib bitte deine E-Mail-Adresse für die Anmeldung an, z. B. name@beispiel.de.</label>
                 </div>
               </div>
+              <div class="consent-field sib-form-block">
+                <label class="consent" for="CONSENT-${prefix}">
+                  <input class="consent__input" type="checkbox" id="CONSENT-${prefix}" required aria-describedby="consent-error-${prefix}">
+                  <span class="consent__box" aria-hidden="true"></span>
+                  <span class="consent__text">Yes! Schick mir den Adventskalender und den Newsletter der Laura Seiler Life Coaching GmbH mit Impulsen und Angeboten. Abmelden geht jederzeit mit einem Klick in jeder E-Mail. Mehr in der <a href="https://gabriele-storz.de/privacy/" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span>
+                </label>
+                <p class="consent__error" id="consent-error-${prefix}" role="alert" hidden></p>
+              </div>
               <div class="sib-form__declaration" style="direction:ltr">
                 <div class="declaration-block-icon">
                   <svg class="svgIcon-sphere" viewBox="0 0 63 63" width="38" height="38" aria-hidden="true">
@@ -422,6 +430,54 @@
   /* ------------------------------------------------------------------------
      Secondary Brevo HTML embeds (Hero & Door Dialog)
      ------------------------------------------------------------------------ */
+
+  const CONSENT_ERROR_MESSAGE = "Bitte bestätige die Einwilligung, um dich anzumelden.";
+
+  function setConsentError(input, invalid) {
+    const field = input.closest(".consent-field");
+    if (!field) return;
+    field.classList.toggle("is-invalid", invalid);
+    const error = field.querySelector(".consent__error");
+    if (error) {
+      error.textContent = invalid ? CONSENT_ERROR_MESSAGE : "";
+      error.hidden = !invalid;
+    }
+    input.setAttribute("aria-invalid", invalid ? "true" : "false");
+  }
+
+  function initConsent() {
+    document.addEventListener("change", (event) => {
+      const input = event.target.closest(".consent__input");
+      if (input?.checked) setConsentError(input, false);
+    });
+
+    document.addEventListener(
+      "invalid",
+      (event) => {
+        const input = event.target.closest?.(".consent__input");
+        if (!input) return;
+        event.preventDefault();
+        setConsentError(input, true);
+      },
+      true
+    );
+
+    /* Blocks submission (also for Brevo's own form handler) until the box is checked. */
+    document.addEventListener(
+      "submit",
+      (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement)) return;
+        const input = form.querySelector(".consent__input");
+        if (!input || input.checked) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setConsentError(input, true);
+        input.focus();
+      },
+      true
+    );
+  }
 
   function initBrevoEmbedForms() {
     const setEntryError = (entry, message) => {
@@ -855,6 +911,7 @@
   function init() {
     renderCalendar();
     initDoorDialog();
+    initConsent();
     initBrevoEmbedForms();
     initFaq();
     initNavigation();
