@@ -216,7 +216,7 @@
               </div>
               <div class="sib-form-block">
                 <button class="button button--primary sib-form-block__button sib-form-block__button-with-loader" form="${formId}" type="submit">
-                  <span>Jetzt kostenlos anmelden</span>
+                  <span>Kostenlos anmelden</span>
                   ${arrowIcon()}
                 </button>
               </div>
@@ -509,7 +509,7 @@
       const emailEntry = emailInput?.closest(".form__entry");
       const submit = form.querySelector('button[type="submit"]');
       const submitLabel = submit?.querySelector("span");
-      const originalLabel = submitLabel?.textContent || "Jetzt kostenlos anmelden";
+      const originalLabel = submitLabel?.textContent || "Kostenlos anmelden";
 
       errorPanel?.classList.remove("sib-form-message-panel--active");
       successPanel?.classList.remove("sib-form-message-panel--active");
