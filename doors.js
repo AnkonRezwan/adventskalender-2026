@@ -48,7 +48,7 @@ window.ADVENT_DOORS = [
   { day: 20, slug: "klarer-raum", type: "gift", title: "Ein Platz im Online-Raum „Klar sehen“", button: "Zu „Klar sehen“", link: "https://pathofgrace.de/" },
   { day: 21, slug: "winters-licht", type: "audio", title: "Wintersonnwende – Licht in der längsten Nacht", button: "Mehr über Path of Grace", link: "https://pathofgrace.de/" },
   { day: 22, slug: "ruhiger-puls", type: "gift", title: "Osteopathie-Behandlung", button: "Termin anfragen", link: "https://gabriele-storz.de/booking" },
-  { day: 23, slug: "neuer-wunsch", type: "audio", title: "Wünsche ins Feuer – deine Absicht fürs neue Jahr", button: "Zu den Online-Räumen", link: "https://pathofgrace.de/#angebot" },
+  { day: 23, slug: "neuer-wunsch", type: "audio", title: "Rückzug in die Stille – zurück in dein Herz", button: "Zu den Online-Räumen", link: "https://pathofgrace.de/#angebot" },
   { day: 24, slug: "heilige-stille", type: "gift", title: "Heiligabend: Ein Platz im Online-Raum „Klar sehen“", button: "Zu den Online-Räumen", link: "https://pathofgrace.de/#angebot" }
 ];
 
