@@ -35,7 +35,7 @@
 
   /* Real recordings override the placeholder files by day. */
   const AUDIO_FILES = {
-    1: "assets/audio/tuerchen-01.m4a"
+    1: "assets/audio/tuerchen-01.mp3"
   };
 
   const AUDIO_LENGTHS = {
