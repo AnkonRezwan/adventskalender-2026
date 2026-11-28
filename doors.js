@@ -26,7 +26,7 @@ window.ADVENT_CONTACT = {
 };
 
 window.ADVENT_DOORS = [
-  { day: 1, slug: "herz-ankommen", type: "audio", special: true, title: "Willkommen – Hände aufs Herz (ca. 5 Min.)", button: "Mehr über Path of Grace", link: "https://pathofgrace.de/" },
+  { day: 1, slug: "herz-ankommen", type: "audio", special: true, title: "Willkommen – Hände aufs Herz (ca. 7 Min.)", button: "Mehr über Path of Grace", link: "https://pathofgrace.de/" },
   { day: 2, slug: "goldener-funke", type: "gift", coupon: true, couponCode: "WZA3N268", title: "50 % auf meine 1:1-Begleitung", button: "Orientierungsgespräch buchen", link: "https://calendly.com/gabriele-storz/the-path-of-grace-erstgesprach" },
   { day: 3, slug: "sanfter-atem", type: "audio", title: "Summen und lange Ausatmung", button: "Zu den Online-Räumen", link: "https://pathofgrace.de/#angebot" },
   { day: 4, slug: "weiter-fluss", type: "gift", title: "Yogastunde", button: "Zu meinen Yogastunden", link: "https://gabriele-storz.de/yoga" },

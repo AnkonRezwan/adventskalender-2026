@@ -33,10 +33,19 @@
     return WEEKDAYS[new Date(Date.UTC(2026, 11, day)).getUTCDay()];
   }
 
-  /* Placeholder audio for all 12 audio doors.
-     When the real MP3s arrive, change ".wav" to ".mp3" and replace the files. */
+  /* Real recordings override the placeholder files by day. */
+  const AUDIO_FILES = {
+    1: "assets/audio/tuerchen-01.m4a"
+  };
+
+  const AUDIO_LENGTHS = {
+    1: "ca. 7 Min."
+  };
+
+  /* Placeholder audio for the remaining audio doors.
+     When the real MP3s arrive, add them to AUDIO_FILES. */
   function audioSrc(day) {
-    return `assets/audio/tuerchen-${pad(day)}.wav`;
+    return AUDIO_FILES[day] || `assets/audio/tuerchen-${pad(day)}.wav`;
   }
 
   function contactLinks(door) {
@@ -259,7 +268,7 @@
             <button class="test-player__btn" id="revealPlay" type="button" aria-label="Abspielen">▶</button>
             <div class="test-player__info">
               <div class="test-player__bar"><span id="revealBar"></span></div>
-              <div class="test-player__meta"><span id="revealTime">0:00</span><span>ca. 5 Min.</span></div>
+              <div class="test-player__meta"><span id="revealTime">0:00</span><span>${AUDIO_LENGTHS[door.day] || "ca. 5 Min."}</span></div>
             </div>
           </div>
           ${planLink(door)}`;
