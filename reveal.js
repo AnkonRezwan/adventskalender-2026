@@ -173,6 +173,13 @@
       const audio = $("#revealAudio");
       const btn = $("#revealPlay");
       if (!audio) return;
+      if (audio.readyState < 2) {
+        if (btn) {
+          btn.textContent = "…";
+          btn.setAttribute("aria-label", "Lädt");
+        }
+        return;
+      }
       if (audio.paused) {
         audio.play().then(() => {
           playerRunning = true;
@@ -216,6 +223,18 @@
         audio.currentTime = 0;
       });
       if (btn) btn.addEventListener("click", togglePlayer);
+      audio.addEventListener("canplay", () => {
+        if (btn && btn.textContent === "…") {
+          btn.textContent = "▶";
+          btn.setAttribute("aria-label", "Abspielen");
+        }
+      }, { once: true });
+      audio.addEventListener("error", () => {
+        if (btn) {
+          btn.textContent = "↺";
+          btn.setAttribute("aria-label", "Fehler – erneut laden");
+        }
+      });
     }
 
     function wireCoupon() {
@@ -264,7 +283,7 @@
       if (isAudio) {
         html += `
           <div class="test-player">
-            <audio id="revealAudio" src="${escapeHtml(audioSrc(door.day))}" preload="metadata"></audio>
+            <audio id="revealAudio" src="${escapeHtml(audioSrc(door.day))}" preload="auto"></audio>
             <button class="test-player__btn" id="revealPlay" type="button" aria-label="Abspielen">▶</button>
             <div class="test-player__info">
               <div class="test-player__bar"><span id="revealBar"></span></div>
